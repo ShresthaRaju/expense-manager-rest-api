@@ -1,7 +1,7 @@
 import Category from '../models/Category';
 import Validation from '../requests/Validation';
 
-class CategoryController {
+class CategoriesController {
 
     // add a new category
     async addNewCategory(request, response) {
@@ -16,7 +16,7 @@ class CategoryController {
             try {
                 let newCategory = new Category(result.value);
                 let category = await newCategory.save();
-                response.status(201).json({ success: true, message: `Category ${category.name} added !`, category: category });
+                response.status(201).json({ success: true, message: `Category ${category.name} added!`, category: category });
             } catch (error) {
                 response.status(500).json({ success: false, error: error.message });
             }
@@ -25,8 +25,7 @@ class CategoryController {
 
     // view a category
     async getCategory(request, response) {
-        let categoryId = request.params.id;
-        let category = await Category.findById(categoryId);
+        let category = await Category.findById(request.params.id);
         if (!category) {
             response.status(404).json({ success: false, message: "Category does not exist!" });
         } else {
@@ -52,7 +51,7 @@ class CategoryController {
                 if (!category) {
                     response.status(404).json({ success: false, message: "Category does not exist!" });
                 } else {
-                    response.status(201).json({ success: true, message: "Category updated !", updatedCategory: category });
+                    response.status(201).json({ success: true, message: "Category updated!", updatedCategory: category });
                 }
             } catch (error) {
                 response.status(500).json({ success: false, error: error.message });
@@ -67,7 +66,7 @@ class CategoryController {
             if (!category) {
                 response.status(404).json({ success: false, message: "Category does not exist!" });
             } else {
-                response.status(201).json({ success: true, message: "Category deleted!", deletedCategory: category });
+                response.status(201).json({ success: true, message: `Category ${category.name} deleted successfully!`, deletedCategory: category });
             }
         } catch (error) {
             response.status(500).json({ success: false, error: error.message });
@@ -75,4 +74,4 @@ class CategoryController {
     }
 }
 
-export default new CategoryController();
+export default new CategoriesController();

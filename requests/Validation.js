@@ -38,6 +38,18 @@ const ADDCATEGORY = (categoryData) => {
     return Joi.validate(categoryData, addCategorySchema, OPTIONS);
 }
 
+const NEWTRANSACTION = (transactionData) => {
+    const newTransactionSchema = Joi.object().keys({
+        memo: Joi.string().min(1).max(50).required().label("Memo"),
+        amount: Joi.number().min(1).required().label("Amount"),
+        type: Joi.string().valid(['Expense', 'Income']).required().label("Transaction type"),
+        date: Joi.date().required().label("Date"),
+        creator: Joi.string().required().label("Creator")
+    });
+
+    return Joi.validate(transactionData, newTransactionSchema, OPTIONS);
+}
+
 module.exports = {
-    SIGNUP, SIGNIN, ADDCATEGORY
+    SIGNUP, SIGNIN, ADDCATEGORY, NEWTRANSACTION
 }

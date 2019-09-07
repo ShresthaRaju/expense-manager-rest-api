@@ -1,7 +1,8 @@
 import express from 'express';
 import SignUpController from '../controllers/auth/SignUpController';
 import SignInController from '../controllers/auth/SignInController';
-import CategoryController from '../controllers/CategoryController';
+import CategoriesController from '../controllers/CategoriesController';
+import TransactionsController from '../controllers/TransactionsController';
 
 const APIROUTER = express.Router();
 
@@ -10,9 +11,15 @@ APIROUTER.post('/sign-up', SignUpController.registerUser);
 APIROUTER.post('/sign-in', SignInController.signIn);
 
 // category
-APIROUTER.post('/category', CategoryController.addNewCategory);
-APIROUTER.get('/category/:id', CategoryController.getCategory);
-APIROUTER.put('/category/:id', CategoryController.updateCategory);
-APIROUTER.delete('/category/:id', CategoryController.deleteCategory);
+APIROUTER.post('/category', CategoriesController.addNewCategory);
+APIROUTER.get('/category/:id', CategoriesController.getCategory);
+APIROUTER.put('/category/:id', CategoriesController.updateCategory);
+APIROUTER.delete('/category/:id', CategoriesController.deleteCategory);
+
+// Transaction
+APIROUTER.post('/transaction', TransactionsController.newTransaction);
+APIROUTER.get('/transaction/:id', TransactionsController.getTransaction);
+APIROUTER.put('/transaction/:id', TransactionsController.updateTransaction);
+APIROUTER.delete('/transaction/:id', TransactionsController.deleteTransaction);
 
 export default APIROUTER;
