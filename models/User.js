@@ -35,20 +35,40 @@ const USERSCHEMA = new SCHEMA({
     }
 });
 
+// mongoose "pre" hook to hash the password of every new user 
+USERSCHEMA.pre('save', async function (next) {
+    if (!this.isNew || !this.isModified) {
+        next();
+    } else {
+        try {
+            // hash the plain text password
+            let hashedPassword = await bcrypt.hash(this.password, 10); // 10 is the salt rounds
+            // set the hashed password to be the password of the new user
+            this.password = hashedPassword;
+            // execute next code 
+            next();
+
+        } catch (error) {
+            next(error);
+            console.log(error.message);
+        }
+    }
+});
+
 //check if email exists already
-UserSchema.statics.emailExists = async function (email) {
-    let emailExists = await User.findOne({ email: email });
+USERSCHEMA.statics.emailExists = async function (email) {
+    let emailExists = await USER.findOne({ email: email });
     return emailExists;
 }
 
 // compare login password with the actual password
-UserSchema.methods.comparePassword = async function (plainPassword) {
+USERSCHEMA.methods.comparePassword = async function (plainPassword) {
     let matched = await bcrypt.compare(plainPassword, this.password);
     return matched;
 }
 
 // hide some attributes of user model while sending json response 
-UserSchema.methods.toJSON = function () {
+USERSCHEMA.methods.toJSON = function () {
     let user = this.toObject();
     delete user.password;
     delete user.createdAt;
