@@ -1,12 +1,15 @@
 import express from 'express';
+import './config/dbConnection';
+import apiRouter from './routes/api';
+
 var app = express();
+
+app.use(express.static('./public'));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    res.end("Welcome to your new app");
-})
+app.use("/api/", apiRouter);
 
 const PORT = 7777;
 
