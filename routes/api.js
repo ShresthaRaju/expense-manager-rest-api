@@ -17,9 +17,10 @@ APIROUTER.put('/category/:id', CategoriesController.updateCategory);
 APIROUTER.delete('/category/:id', CategoriesController.deleteCategory);
 
 // Transaction
-APIROUTER.post('/transaction', TransactionsController.newTransaction);
-APIROUTER.get('/transaction/:id', TransactionsController.getTransaction);
-APIROUTER.put('/transaction/:id', TransactionsController.updateTransaction);
-APIROUTER.delete('/transaction/:id', TransactionsController.deleteTransaction);
+APIROUTER.post('/transactions', TransactionsController.newTransaction);
+APIROUTER.get('/transactions', TransactionsController.getMyTransactions);
+APIROUTER.get('/transactions/:id', TransactionsController.getTransaction);
+APIROUTER.put('/transactions/:id', TransactionsController.updateTransaction);
+APIROUTER.delete('/transactions/:id', TransactionsController.deleteTransaction);
 
 export default APIROUTER;

@@ -68,6 +68,21 @@ class TransactionsController {
             response.status(500).json({ success: false, error: error.message });
         }
     }
+
+    // get all transcations
+    async getMyTransactions(request, response) {
+        let creator = request.body.creator;
+        try {
+            let myTransactions = await Transaction.find({ creator: creator });
+            if (myTransactions.length < 1) {
+                response.status(204).json({ success: true, message: "You do not have any transaction yet!" });
+            } else {
+                response.status(201).json({ success: true, myTransactions: myTransactions });
+            }
+        } catch (error) {
+            response.status(500).json({ success: false, error: error.message });
+        }
+    }
 }
 
 export default new TransactionsController();
