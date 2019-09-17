@@ -19,7 +19,7 @@ class SignInController {
                     response.status(404).json({ success: false, error: { field: "email", message: "User does not exist!" } });
                 } else {
                     if (await user.comparePassword(result.value.password)) {
-                        response.status(200).json({ success: true, authUser: user });
+                        response.status(200).json({ success: true, user: user });
                     } else {
                         response.status(401).json({ success: false, error: { field: "email", message: "Invalid login. Try again!" } });
                     }

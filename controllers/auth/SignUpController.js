@@ -17,7 +17,7 @@ class SignUpController {
                 // save the new user in db
                 let newUser = new User(result.value);
                 let user = await newUser.save();
-                response.status(201).json({ success: true, message: "Sign up successful!", updatedUser: user });
+                response.status(201).json({ success: true, message: "Sign up successful!", user: user });
             } catch (error) {
                 response.status(500).json({ success: false, error: error.message });
             }

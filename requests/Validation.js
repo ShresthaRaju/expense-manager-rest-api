@@ -32,6 +32,7 @@ const ADDCATEGORY = (categoryData) => {
     const addCategorySchema = Joi.object().keys({
         name: Joi.string().min(2).max(30).required().label("Category name"),
         type: Joi.string().valid(['Expense', 'Income']).required().label("Category type"),
+        icon: Joi.string().label("Icon"),
         creator: Joi.string().required().label("Creator")
     });
 
@@ -43,7 +44,7 @@ const NEWTRANSACTION = (transactionData) => {
         memo: Joi.string().min(1).max(50).required().label("Memo"),
         amount: Joi.number().min(1).required().label("Amount"),
         type: Joi.string().valid(['Expense', 'Income']).required().label("Transaction type"),
-        category:Joi.string().required().label("Category"),
+        category: Joi.string().required().label("Category"),
         date: Joi.date().required().label("Date"),
         creator: Joi.string().required().label("Creator")
     });

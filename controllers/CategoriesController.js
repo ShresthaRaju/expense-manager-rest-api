@@ -33,6 +33,16 @@ class CategoriesController {
         }
     }
 
+    // view all categories
+    async getAllCategories(request, response) {
+        let categories = await Category.find();
+        if (!categories) {
+            response.status(404).json({ success: false, message: "No category !" });
+        } else {
+            response.status(201).json({ success: true, categories: categories });
+        }
+    }
+
     // edit and update the existing category
     async updateCategory(request, response) {
         const result = Validation.ADDCATEGORY(request.body);

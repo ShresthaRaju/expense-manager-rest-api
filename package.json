@@ -4,7 +4,8 @@
   "description": "A backend developed for an android application that hepls you track your expenses.",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node app.js"
+    "dev": "nodemon --exec babel-node app.js",
+    "seed":"babel-node seed/categories-seeder.js"
   },
   "keywords": [
     "Web-Api",

@@ -15,7 +15,8 @@ const CATEGORYSCHEMA = new SCHEMA({
         trim: true
     },
     icon: {
-        name: String
+        type: String,
+        default: "others.png"
     },
     creator: {
         type: SCHEMA.Types.ObjectId,
@@ -36,6 +37,7 @@ CATEGORYSCHEMA.statics.existsAlready = async function (name, type, creator) {
 CATEGORYSCHEMA.methods.toJSON = function () {
     let category = this.toObject();
     delete category.createdAt;
+    delete category.creator;
     delete category.__v;
     return category;
 };
