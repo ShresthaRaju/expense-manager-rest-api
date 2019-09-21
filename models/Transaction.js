@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import User from './User';
-import Category from './Category'
+import UserCategory from './UserCategory';
 
 const SCHEMA = mongoose.Schema;
 
@@ -19,7 +19,7 @@ const TRANSACTIONSCHEMA = new SCHEMA({
     },
     category:{
         type:SCHEMA.Types.ObjectId,
-        ref:Category
+        ref:UserCategory
     },
     date: {
         type: Date,

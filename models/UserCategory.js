@@ -3,7 +3,7 @@ import User from './User';
 
 const SCHEMA = mongoose.Schema;
 
-const CATEGORYSCHEMA = new SCHEMA({
+const USERCATEGORYSCHEMA = new SCHEMA({
     name: {
         type: String,
         required: [true, 'Category name is required'],
@@ -29,12 +29,12 @@ const CATEGORYSCHEMA = new SCHEMA({
 });
 
 //check if category exists already
-CATEGORYSCHEMA.statics.existsAlready = async function (name, type, creator) {
-    let categoryExists = await CATEGORY.findOne({ name: name, type: type, creator: creator });
+USERCATEGORYSCHEMA.statics.existsAlready = async function (name, type, creator) {
+    let categoryExists = await USERCATEGORY.findOne({ name: name, type: type, creator: creator });
     return categoryExists;
 }
 
-CATEGORYSCHEMA.methods.toJSON = function () {
+USERCATEGORYSCHEMA.methods.toJSON = function () {
     let category = this.toObject();
     delete category.createdAt;
     delete category.creator;
@@ -42,5 +42,5 @@ CATEGORYSCHEMA.methods.toJSON = function () {
     return category;
 };
 
-const CATEGORY = mongoose.model('category', CATEGORYSCHEMA);
-export default CATEGORY;
+const USERCATEGORY = mongoose.model('user_category', USERCATEGORYSCHEMA);
+export default USERCATEGORY;

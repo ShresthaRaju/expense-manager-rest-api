@@ -11,9 +11,11 @@ APIROUTER.post('/sign-up', SignUpController.registerUser);
 APIROUTER.post('/sign-in', SignInController.signIn);
 
 // category
+APIROUTER.get('/categories/expense', CategoriesController.getExpenseCategories);
+APIROUTER.get('/categories/income', CategoriesController.getIncomeCategories);
 APIROUTER.post('/categories', CategoriesController.addNewCategory);
-APIROUTER.get('/categories', CategoriesController.getAllCategories);
-APIROUTER.get('/categories/:id', CategoriesController.getCategory);
+APIROUTER.get('/categories/:id', CategoriesController.getSingleCategory);
+APIROUTER.get('/categories/users/:userId', CategoriesController.getUserCategories);
 APIROUTER.put('/categories/:id', CategoriesController.updateCategory);
 APIROUTER.delete('/categories/:id', CategoriesController.deleteCategory);
 
