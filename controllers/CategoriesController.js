@@ -11,7 +11,7 @@ class CategoriesController {
         if (!expenseCategories) {
             response.status(204).json({ success: false, message: "No category in expense !" });
         } else {
-            response.status(201).json({ success: true, categories: expenseCategories });
+            response.status(200).json({ success: true, categories: expenseCategories });
         }
     }
 
@@ -20,7 +20,7 @@ class CategoriesController {
         if (!incomeCategories) {
             response.status(204).json({ success: false, message: "No category in income !" });
         } else {
-            response.status(201).json({ success: true, categories: incomeCategories });
+            response.status(200).json({ success: true, categories: incomeCategories });
         }
     }
 
@@ -51,7 +51,7 @@ class CategoriesController {
         if (!category) {
             response.status(404).json({ success: false, message: "Category does not exist!" });
         } else {
-            response.status(201).json({ success: true, category: category });
+            response.status(200).json({ success: true, category: category });
         }
     }
 
@@ -62,7 +62,7 @@ class CategoriesController {
         if (!userCategories) {
             response.status(204).json({ success: false, message: "No category yet!" });
         } else {
-            response.status(201).json({ success: true, categories: userCategories });
+            response.status(200).json({ success: true, categories: userCategories });
         }
     }
 
@@ -99,7 +99,7 @@ class CategoriesController {
             if (!category) {
                 response.status(404).json({ success: false, message: "Category does not exist!" });
             } else {
-                response.status(201).json({ success: true, message: `Category '${category.name}' deleted successfully!`, deletedCategory: category });
+                response.status(200).json({ success: true, message: `Category '${category.name}' deleted successfully!`, deletedCategory: category });
             }
         } catch (error) {
             response.status(500).json({ success: false, error: error.message });

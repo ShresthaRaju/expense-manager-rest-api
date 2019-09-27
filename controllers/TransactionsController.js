@@ -27,7 +27,7 @@ class TransactionsController {
         if (!transaction) {
             response.status(404).json({ success: false, message: "Transaction does not exist!" });
         } else {
-            response.status(201).json({ success: true, transaction: transaction });
+            response.status(200).json({ success: true, transaction: transaction });
         }
     }
 
@@ -62,22 +62,22 @@ class TransactionsController {
             if (!transaction) {
                 response.status(404).json({ success: false, message: "Transaction does not exist!" });
             } else {
-                response.status(201).json({ success: true, message: `${transaction.memo} deleted successfully!`, deletedTransaction: transaction });
+                response.status(200).json({ success: true, message: `${transaction.memo} deleted successfully!`, deletedTransaction: transaction });
             }
         } catch (error) {
             response.status(500).json({ success: false, error: error.message });
         }
     }
 
-    // get all transcations
+    // get users transcations
     async getMyTransactions(request, response) {
-        let creator = request.body.creator;
+        let creator = request.params.creator;
         try {
             let myTransactions = await Transaction.find({ creator: creator });
             if (myTransactions.length < 1) {
                 response.status(204).json({ success: true, message: "You do not have any transaction yet!" });
             } else {
-                response.status(201).json({ success: true, myTransactions: myTransactions });
+                response.status(200).json({ success: true, myTransactions: myTransactions });
             }
         } catch (error) {
             response.status(500).json({ success: false, error: error.message });
