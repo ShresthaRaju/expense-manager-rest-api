@@ -1,5 +1,6 @@
 import Transaction from '../models/Transaction';
 import Validation from '../requests/Validation';
+import UserController from './UserController';
 
 class TransactionsController {
 
@@ -11,6 +12,11 @@ class TransactionsController {
             let error = result.error.details[0];
             response.status(422).json({ success: false, error: { field: error.path[0], message: error.message } });
         } else {
+            if (result.value.type === "Expense") {
+                UserController.addExpense(result.value.creator, result.value.amount);
+            } else {
+                UserController.addIncome(result.value.creator, result.value.amount);
+            }
             try {
                 let newTransaction = new Transaction(result.value);
                 let transaction = await newTransaction.save();
@@ -47,7 +53,7 @@ class TransactionsController {
                 if (!transaction) {
                     response.status(404).json({ success: false, message: "Transaction does not exist!" });
                 } else {
-                    response.status(201).json({ success: true, message: "Transaction updated!", updatedTransaction: transaction });
+                    response.status(201).json({ success: true, message: "Transaction updated!", transaction: transaction });
                 }
             } catch (error) {
                 response.status(500).json({ success: false, error: error.message });
@@ -62,7 +68,7 @@ class TransactionsController {
             if (!transaction) {
                 response.status(404).json({ success: false, message: "Transaction does not exist!" });
             } else {
-                response.status(200).json({ success: true, message: `${transaction.memo} deleted successfully!`, deletedTransaction: transaction });
+                response.status(200).json({ success: true, message: `${transaction.memo} deleted successfully!`, transaction: transaction });
             }
         } catch (error) {
             response.status(500).json({ success: false, error: error.message });
@@ -73,7 +79,7 @@ class TransactionsController {
     async getMyTransactions(request, response) {
         let creator = request.params.creator;
         try {
-            let myTransactions = await Transaction.find({ creator: creator });
+            let myTransactions = await Transaction.find({ creator: creator }).sort({ createdAt: -1 }).populate('category');
             if (myTransactions.length < 1) {
                 response.status(204).json({ success: true, message: "You do not have any transaction yet!" });
             } else {

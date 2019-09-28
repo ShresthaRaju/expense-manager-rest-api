@@ -1,89 +1,105 @@
 
 import mongoose from 'mongoose';
-import DefaultCategory from '../models/DefaultCategory';
+import Category from '../models/Category';
 
 mongoose.connect("mongodb://127.0.0.1:27017/expense_manager", { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false });
 
 let defaultCategories = [
-    new DefaultCategory({
+    new Category({
         name: "Food",
         type: "Expense",
-        icon: "food.png"
+        icon: "food.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Transportation",
         type: "Expense",
-        icon: "transportation.png"
+        icon: "transportation.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Entertainment",
         type: "Expense",
-        icon: "entertainment.png"
+        icon: "entertainment.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Travel",
         type: "Expense",
-        icon: "travel.png"
+        icon: "travel.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Education",
         type: "Expense",
-        icon: "education.png"
+        icon: "education.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Bills",
         type: "Expense",
-        icon: "bills.png"
+        icon: "bills.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Mobile",
         type: "Expense",
-        icon: "mobile.png"
+        icon: "mobile.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Cigarette",
         type: "Expense",
-        icon: "cigarette.png"
+        icon: "cigarette.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Shopping",
         type: "Expense",
-        icon: "shopping.png"
+        icon: "shopping.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Beauty",
         type: "Expense",
-        icon: "beauty.png"
+        icon: "beauty.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Gadgets",
         type: "Expense",
-        icon: "gadgets.png"
+        icon: "gadgets.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Others",
         type: "Expense",
-        icon: "others.png"
+        icon: "others.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Salary",
         type: "Income",
-        icon: "salary.png"
+        icon: "salary.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Incentive",
         type: "Income",
-        icon: "incentive.png"
+        icon: "incentive.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Rental",
         type: "Income",
-        icon: "rental.png"
+        icon: "rental.png",
+        addedBy: "admin"
     }),
-    new DefaultCategory({
+    new Category({
         name: "Investment",
         type: "Income",
-        icon: "investment.png"
+        icon: "investment.png",
+        addedBy: "admin"
     }),
 ];
 

@@ -1,6 +1,7 @@
 import express from 'express';
 import SignUpController from '../controllers/auth/SignUpController';
 import SignInController from '../controllers/auth/SignInController';
+import UserController from '../controllers/UserController';
 import CategoriesController from '../controllers/CategoriesController';
 import TransactionsController from '../controllers/TransactionsController';
 
@@ -9,6 +10,7 @@ const APIROUTER = express.Router();
 // auth requests
 APIROUTER.post('/sign-up', SignUpController.registerUser);
 APIROUTER.post('/sign-in', SignInController.signIn);
+APIROUTER.get('/users/current/:id', UserController.getCurrentUser);
 
 // category
 APIROUTER.get('/categories/expense', CategoriesController.getExpenseCategories);

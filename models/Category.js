@@ -3,7 +3,7 @@ import User from './User';
 
 const SCHEMA = mongoose.Schema;
 
-const USERCATEGORYSCHEMA = new SCHEMA({
+const CATEGORYSCHEMA = new SCHEMA({
     name: {
         type: String,
         required: [true, 'Category name is required'],
@@ -18,6 +18,10 @@ const USERCATEGORYSCHEMA = new SCHEMA({
         type: String,
         default: "others.png"
     },
+    addedBy: {
+        type: String,
+        default: "user"
+    },
     creator: {
         type: SCHEMA.Types.ObjectId,
         ref: User
@@ -29,18 +33,19 @@ const USERCATEGORYSCHEMA = new SCHEMA({
 });
 
 //check if category exists already
-USERCATEGORYSCHEMA.statics.existsAlready = async function (name, type, creator) {
-    let categoryExists = await USERCATEGORY.findOne({ name: name, type: type, creator: creator });
+CATEGORYSCHEMA.statics.existsAlready = async function (name, type, creator) {
+    let categoryExists = await CATEGORY.findOne({ name: name, type: type, creator: creator });
     return categoryExists;
 }
 
-USERCATEGORYSCHEMA.methods.toJSON = function () {
+CATEGORYSCHEMA.methods.toJSON = function () {
     let category = this.toObject();
+    delete category.addedBy;
     delete category.createdAt;
     delete category.creator;
     delete category.__v;
     return category;
 };
 
-const USERCATEGORY = mongoose.model('user_category', USERCATEGORYSCHEMA);
-export default USERCATEGORY;
+const CATEGORY = mongoose.model('category', CATEGORYSCHEMA);
+export default CATEGORY;

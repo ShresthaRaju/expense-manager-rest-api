@@ -29,6 +29,14 @@ const USERSCHEMA = new SCHEMA({
         type: String,
         default: "dp_placeholder.png"
     },
+    totalIncome: {
+        type: Number,
+        default: 0
+    },
+    totalExpense: {
+        type: Number,
+        default: 0
+    },
     createdAt: {
         type: Date,
         default: Date.now
