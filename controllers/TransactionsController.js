@@ -19,7 +19,8 @@ class TransactionsController {
             }
             try {
                 let newTransaction = new Transaction(result.value);
-                let transaction = await newTransaction.save();
+                let saved = await newTransaction.save();
+                let transaction = await saved.populate("category").execPopulate();
                 response.status(201).json({ success: true, message: `Transaction recorded!`, transaction: transaction });
             } catch (error) {
                 response.status(500).json({ success: false, error: error.message });
