@@ -42,7 +42,6 @@ CATEGORYSCHEMA.methods.toJSON = function () {
     let category = this.toObject();
     delete category.addedBy;
     delete category.createdAt;
-    delete category.creator;
     delete category.__v;
     return category;
 };

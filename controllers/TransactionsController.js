@@ -30,7 +30,7 @@ class TransactionsController {
 
     // view a transaction
     async getTransaction(request, response) {
-        let transaction = await Transaction.findById(request.params.id);
+        let transaction = await Transaction.findById(request.params.id).populate('category');
         if (!transaction) {
             response.status(404).json({ success: false, message: "Transaction does not exist!" });
         } else {
@@ -48,9 +48,9 @@ class TransactionsController {
         } else {
             try {
                 let transactionId = request.params.id;
-                let { memo, amount, type, date } = result.value;
+                let { memo, amount, type, date, category } = result.value;
 
-                let transaction = await Transaction.findOneAndUpdate({ _id: transactionId }, { memo, amount, type, date }, { new: true });
+                let transaction = await Transaction.findOneAndUpdate({ _id: transactionId }, { memo, amount, type, date, category }, { new: true }).populate('category');
                 if (!transaction) {
                     response.status(404).json({ success: false, message: "Transaction does not exist!" });
                 } else {
@@ -65,7 +65,7 @@ class TransactionsController {
     // delete a Transaction
     async deleteTransaction(request, response) {
         try {
-            let transaction = await Transaction.findOneAndDelete({ _id: request.params.id });
+            let transaction = await Transaction.findOneAndDelete({ _id: request.params.id }).populate('category');
             if (!transaction) {
                 response.status(404).json({ success: false, message: "Transaction does not exist!" });
             } else {
