@@ -90,6 +90,36 @@ class TransactionsController {
             response.status(500).json({ success: false, error: error.message });
         }
     }
+
+    // get expense transcations
+    async getExpenseTransactions(request, response) {
+        let creator = request.params.creator;
+        try {
+            let myTransactions = await Transaction.find({ creator: creator, type: "Expense" }).sort({ createdAt: -1 }).populate('category');
+            if (myTransactions.length < 1) {
+                response.status(204).json({ success: true, message: "No expense transaction yet!" });
+            } else {
+                response.status(200).json({ success: true, myTransactions: myTransactions });
+            }
+        } catch (error) {
+            response.status(500).json({ success: false, error: error.message });
+        }
+    }
+
+    // get income transcations
+    async getIncomeTransactions(request, response) {
+        let creator = request.params.creator;
+        try {
+            let myTransactions = await Transaction.find({ creator: creator, type: "Income" }).sort({ createdAt: -1 }).populate('category');
+            if (myTransactions.length < 1) {
+                response.status(204).json({ success: true, message: "No income transaction yet!" });
+            } else {
+                response.status(200).json({ success: true, myTransactions: myTransactions });
+            }
+        } catch (error) {
+            response.status(500).json({ success: false, error: error.message });
+        }
+    }
 }
 
 export default new TransactionsController();
